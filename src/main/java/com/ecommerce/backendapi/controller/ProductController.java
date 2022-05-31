@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    // Rest endpoint to get list of all products.
+    // Rest endpoint to read list of all products from database.
     @GetMapping
     public List<ProductDto> getAllPosts(){
        return productService.getAllProducts();
