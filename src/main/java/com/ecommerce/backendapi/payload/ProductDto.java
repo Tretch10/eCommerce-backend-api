@@ -7,5 +7,6 @@ public class ProductDto {
     private long id;
     private String productName;
     private String description;
+    private String productImageUrl;
     private double price;
 }
