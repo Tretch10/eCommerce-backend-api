@@ -3,10 +3,9 @@ package com.ecommerce.backendapi.controller;
 import com.ecommerce.backendapi.payload.ProductDto;
 import com.ecommerce.backendapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +21,11 @@ public class ProductController {
     @GetMapping
     public List<ProductDto> getAllPosts(){
        return productService.getAllProducts();
+    }
+
+    // Rest endpoint to create a new product
+    @PostMapping
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
+        return new ResponseEntity<>(productService.createProduct(productDto), HttpStatus.CREATED);
     }
 }

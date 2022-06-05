@@ -5,7 +5,6 @@ import com.ecommerce.backendapi.payload.ProductDto;
 import com.ecommerce.backendapi.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,17 @@ public class ProductServiceImpl implements ProductService{
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(product -> mapToDto(product)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto createProduct(ProductDto productDto) {
+        // Map DTO to entity and save
+        Product product = mapToEntity(productDto);
+        Product newProduct = productRepository.save(product);
+
+        // Map new product entity back to DTO
+        ProductDto productResponse = mapToDto(newProduct);
+        return productResponse;
     }
 
 
