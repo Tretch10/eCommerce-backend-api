@@ -28,4 +28,10 @@ public class ProductController {
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
         return new ResponseEntity<>(productService.createProduct(productDto), HttpStatus.CREATED);
     }
+
+    // Rest endpoint to get product by Id
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable (name = "id") long id){
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
 }

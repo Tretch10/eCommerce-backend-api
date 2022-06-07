@@ -1,6 +1,7 @@
 package com.ecommerce.backendapi.service;
 
 import com.ecommerce.backendapi.entity.Product;
+import com.ecommerce.backendapi.exception.ResourceNotFoundException;
 import com.ecommerce.backendapi.payload.ProductDto;
 import com.ecommerce.backendapi.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,13 @@ public class ProductServiceImpl implements ProductService{
         // Map new product entity back to DTO
         ProductDto productResponse = mapToDto(newProduct);
         return productResponse;
+    }
+
+    // Business logic to get a product by id
+    @Override
+    public ProductDto getProductById(long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "Id", id));
+        return mapToDto(product);
     }
 
 
