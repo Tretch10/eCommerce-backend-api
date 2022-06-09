@@ -35,9 +35,17 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
+    // Rest endpoint to delete product by Id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProductById(@PathVariable(name = "id") long id){
         productService.deletePostById(id);
         return new ResponseEntity<>("Product deleted successfully", HttpStatus.OK);
+    }
+
+    //Rest endpoint to update product
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "id") long id, ProductDto productDto){
+        ProductDto productCreated = productService.updateProduct(id, productDto);
+        return new ResponseEntity<>(productCreated, HttpStatus.OK);
     }
 }

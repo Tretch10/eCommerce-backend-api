@@ -46,11 +46,25 @@ public class ProductServiceImpl implements ProductService{
         return mapToDto(product);
     }
 
-    // Logic to delete post by Id
+    // Logic to delete product by Id
     @Override
     public void deletePostById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "Id", id));
         productRepository.delete(product);
+    }
+
+    @Override
+    public ProductDto updateProduct(long id, ProductDto productDto) {
+        // get product by Id from database
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "Id", id));
+
+        product.setProductName(productDto.getProductName());
+        product.setDescription(productDto.getDescription());
+        product.setProductImageUrl(productDto.getProductImageUrl());
+        product.setPrice(productDto.getPrice());
+
+        Product updatedProduct = productRepository.save(product);
+        return mapToDto(updatedProduct);
     }
 
 
