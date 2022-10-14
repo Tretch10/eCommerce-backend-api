@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService{
 
     // Logic to delete product by Id
     @Override
-    public void deletePostById(long id) {
+    public void deleteProductById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "Id", id));
         productRepository.delete(product);
     }

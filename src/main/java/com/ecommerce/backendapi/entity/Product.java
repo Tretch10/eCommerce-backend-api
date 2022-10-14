@@ -4,10 +4,7 @@ This class is for Object Relational Mapping. Here, we create Java objects that a
 in MySQL.
  */
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class Product {
 // This defines id field as the primary key of the database table and will be auto-generated.

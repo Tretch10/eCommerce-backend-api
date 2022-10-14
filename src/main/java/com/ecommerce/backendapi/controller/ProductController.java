@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/v1/api/products")
 
@@ -38,13 +38,13 @@ public class ProductController {
     // Rest endpoint to delete product by Id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProductById(@PathVariable(name = "id") long id){
-        productService.deletePostById(id);
+        productService.deleteProductById(id);
         return new ResponseEntity<>("Product deleted successfully", HttpStatus.OK);
     }
 
     //Rest endpoint to update product
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "id") long id, ProductDto productDto){
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "id") long id, @RequestBody ProductDto productDto){
         ProductDto productCreated = productService.updateProduct(id, productDto);
         return new ResponseEntity<>(productCreated, HttpStatus.OK);
     }
